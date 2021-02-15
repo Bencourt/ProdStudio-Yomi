@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player_combat : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class player_combat : MonoBehaviour
     public Vector3 knockbackDirection;
 
     public int maxHealth = 100;
-    int currentHealth;
+    float currentHealth;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class player_combat : MonoBehaviour
                 attackTime = Time.time + 1f / attackRate;
             }
         }
-        
+        HealthBarHandler.SetHealthBarValue(currentHealth / 100); // Changes health bar in HealthBarHandler Script
     }
 
     void Attack()
