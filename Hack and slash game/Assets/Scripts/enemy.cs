@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     public int maxHealth = 100;
-    int currentHealth;
+    public float currentHealth;
     public CharacterController characterController;
+    public PlayerCombat playerCombat;
     public Vector3 knockbackDirection;
 
     public Transform playerCheck;
@@ -37,18 +38,23 @@ public class enemy : MonoBehaviour
         }
         knockbackDirection = Vector3.Lerp(knockbackDirection, Vector3.zero, Time.deltaTime * 2f);
 
-        if (GetComponent<enemy_behavior>().enemyState == state.attack && !attacked && Time.time >= attackWindupTime)
+        if (GetComponent<EnemyBehavior>().enemyState == state.attack && !attacked && Time.time >= attackWindupTime)
         {
                 Debug.Log("Attacked");
                 attacked = true;
                 Attack();
                 attackTime = Time.time + 1f / attackRate;
         }
-        if (GetComponent<enemy_behavior>().enemyState == state.attack && Time.time >= attackTime && attacked)
+        if (GetComponent<EnemyBehavior>().enemyState == state.attack && Time.time >= attackTime && attacked)
         {
             Debug.Log("attacking");
                 attacked = false;
                 attackWindupTime = Time.time + 1f / attackWindup;
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
         }
     }
 
@@ -59,8 +65,8 @@ public class enemy : MonoBehaviour
         foreach (Collider player in hitPlayer)
         {
             //Debug.Log("hit player name:" + player.name);
-            player.GetComponent<player_combat>().TakeDamage(damage);
-            player.GetComponent<player_combat>().TakeKnockback(damage, transform);
+            player.GetComponent<PlayerCombat>().TakeDamage(damage);
+            player.GetComponent<PlayerCombat>().TakeKnockback(damage, transform);
         }
     }
 
@@ -80,25 +86,24 @@ public class enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int danage)
+    public void TakeDamage(int damageValue)
     {
-        currentHealth -= danage;
-        if(GetComponent<enemy_behavior>().enemyState == state.attack)
+        currentHealth -= damageValue;
+        if(GetComponent<EnemyBehavior>().enemyState == state.attack)
         {
             attackTime = Time.time + 1f / attackRate;
         }
-        if(currentHealth <= 0)
-        {
-            die();
-        }
     }
 
-    void die()
+    void Die()
     {
         //Debug.Log("enemy died!");
         GetComponent<CharacterController>().enabled = false;
-        GetComponent<enemy_behavior>().enabled = false;
+        GetComponent<EnemyBehavior>().enabled = false;
         this.enabled = false;
+        Debug.Log(playerCombat.GetComponent<PlayerCombat>().enemies);
+        playerCombat.GetComponent<PlayerCombat>().enemies.Remove(this);
+        Destroy(this);
     }
 
     void OnDrawGizmosSelected()
@@ -106,6 +111,15 @@ public class enemy : MonoBehaviour
         if (playerCheck == null)
             return;
         Gizmos.DrawWireSphere(playerCheck.position, attackRange);
+    }
+
+    public float GetCurrentHealth()
+    {
+        if (currentHealth/100 < 0)
+        {
+            return 0;
+        }
+        return currentHealth/100;
     }
 
 }
