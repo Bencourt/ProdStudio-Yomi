@@ -100,8 +100,8 @@ public class Enemy : MonoBehaviour
         //Debug.Log("enemy died!");
         GetComponent<CharacterController>().enabled = false;
         GetComponent<EnemyBehavior>().enabled = false;
-        this.enabled = false;
-        Debug.Log(playerCombat.GetComponent<PlayerCombat>().enemies);
+        //this.enabled = false;
+        //Debug.Log(playerCombat.GetComponent<PlayerCombat>().enemies);
         playerCombat.GetComponent<PlayerCombat>().enemies.Remove(this);
         Destroy(this);
     }

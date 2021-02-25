@@ -1082,7 +1082,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115830322}
-  m_LocalRotation: {x: 0.105833784, y: -0.37650013, z: 0.04334289, w: 0.91933036}
+  m_LocalRotation: {x: 0.10583378, y: -0.37650013, z: 0.043342885, w: 0.91933036}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10024,6 +10024,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137097569}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1141112991 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5353400546931680205, guid: 7d0827b3324efd04a81056334e5cbd77,
+    type: 3}
+  m_PrefabInstance: {fileID: 5353400547204744723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141377372
 GameObject:
   m_ObjectHideFlags: 0
@@ -11636,14 +11642,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  characterController: {fileID: 1324673359}
+  characterController: {fileID: 1709751879}
   playerCombat: {fileID: 1709751880}
   knockbackDirection: {x: 0, y: 0, z: 0}
   playerCheck: {fileID: 1883093349}
   attackRange: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   damage: 10
   knockback: 10
   attackWindup: 1
@@ -17334,14 +17340,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  characterController: {fileID: 2068247069}
+  characterController: {fileID: 1709751879}
   playerCombat: {fileID: 1709751880}
   knockbackDirection: {x: 0, y: 0, z: 0}
   playerCheck: {fileID: 298774585}
   attackRange: 1
   playerLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   damage: 10
   knockback: 10
   attackWindup: 1
@@ -17896,6 +17902,16 @@ PrefabInstance:
       propertyPath: playerCombat
       value: 
       objectReference: {fileID: 1709751880}
+    - target: {fileID: 5353400547199491491, guid: 7d0827b3324efd04a81056334e5cbd77,
+        type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 1709751879}
+    - target: {fileID: 5353400547199491491, guid: 7d0827b3324efd04a81056334e5cbd77,
+        type: 3}
+      propertyPath: playerCheck
+      value: 
+      objectReference: {fileID: 1141112991}
     - target: {fileID: 5353400547199491516, guid: 7d0827b3324efd04a81056334e5cbd77,
         type: 3}
       propertyPath: m_LocalPosition.x
