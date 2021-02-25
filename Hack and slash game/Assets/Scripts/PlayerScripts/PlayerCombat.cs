@@ -12,12 +12,18 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayer;
     public List<Enemy> enemies = new List<Enemy>();
     public int damage = 30;
-    public int knockback = 30;
+    public int damage2 = 25;
+    public int damage3 = 40;
+    public int knockback1 = 15;
+    public int knockback2 = 40;
     private bool attacked;
+    private bool attacked2;
     public GameObject enemyUI;
 
     public float attackRate = 2f;
     float attackTime = 0.0f;
+    float attackTime2 = 0.0f;
+    float attackTime3 = 0.0f;
 
     public Vector3 knockbackDirection;
 
@@ -28,6 +34,7 @@ public class PlayerCombat : MonoBehaviour
     {
         currentHealth = maxHealth;
         attacked = false;
+        attacked2 = false;
 
         GameObject[] enemiesArray = GameObject.FindGameObjectsWithTag("Enemies");
         //Debug.Log(enemiesArray.Length);
@@ -49,28 +56,46 @@ public class PlayerCombat : MonoBehaviour
             characterController.Move(knockbackDirection * Time.deltaTime);
         }
         knockbackDirection = Vector3.Lerp(knockbackDirection, Vector3.zero, Time.deltaTime * 2f);
-
-        if (Time.time >= attackTime)
+        if(Time.time >= attackTime && Time.time >= attackTime2 && Time.time >= attackTime3)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            attacked = false;
+            attacked2 = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (Time.time >= attackTime && !attacked)
             {
-                //Debug.Log("Attacked");
-                Attack();
+                Debug.Log("Attacked");
+                Attack(damage, knockback1);
                 attackTime = Time.time + 1f / attackRate;
+                attacked = true;
+            }
+            else if(Time.time < attackTime && Time.time >= attackTime2 && attacked && !attacked2)
+            {
+                Debug.Log("Attacked2");
+                Attack(damage2, knockback1);
+                attacked2 = true;
+                attackTime2 = Time.time + 1f / attackRate;
+            }
+            else if (Time.time < attackTime2 && Time.time >= attackTime3 && attacked2)
+            {
+                Debug.Log("Attacked3");
+                Attack(damage3, knockback2);
+                attackTime3 = Time.time + 1f / attackRate;
             }
         }
         PlayerHealthBarHandler.SetHealthBarValue(currentHealth / 100); // Changes health bar in HealthBarHandler Script
         GetClosestEnemy(enemies);
     }
 
-    void Attack()
+    void Attack(int dmg, int knockback)
     {
         Collider[] hitEnemies = Physics.OverlapSphere(enemyCheck.position, attackRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)
         {
             //Debug.Log("hit enemy name:" + enemy.name);
-            enemy.GetComponent<Enemy>().TakeDamage(damage);
+            enemy.GetComponent<Enemy>().TakeDamage(dmg);
             enemy.GetComponent<Enemy>().TakeKnockback(knockback, transform);
         }
     }
