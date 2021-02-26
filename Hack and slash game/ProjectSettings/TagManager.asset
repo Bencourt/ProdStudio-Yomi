@@ -8,6 +8,8 @@ TagManager:
   - EnemyUI
   - Item
   - EquipmentManager
+  - InGameUI
+  - PauseMenuUI
   layers:
   - Default
   - TransparentFX
