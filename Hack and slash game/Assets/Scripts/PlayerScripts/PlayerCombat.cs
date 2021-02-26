@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform enemyCheck;
     public float attackRange = 1;
     public LayerMask enemyLayer;
-    public List<Enemy> enemies = new List<Enemy>();
+    public List<EnemyController> enemies = new List<EnemyController>();
     public int damage = 30;
     public int damage2 = 25;
     public int damage3 = 40;
@@ -40,7 +40,7 @@ public class PlayerCombat : MonoBehaviour
         //Debug.Log(enemiesArray.Length);
         for(int i = 0; i < enemiesArray.Length; i++)
         {
-            enemies.Add(enemiesArray[i].gameObject.GetComponent<Enemy>());
+            enemies.Add(enemiesArray[i].gameObject.GetComponent<EnemyController>());
             //Debug.Log(enemies[0].name);
         }
 
@@ -95,8 +95,8 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider enemy in hitEnemies)
         {
             //Debug.Log("hit enemy name:" + enemy.name);
-            enemy.GetComponent<Enemy>().TakeDamage(dmg);
-            enemy.GetComponent<Enemy>().TakeKnockback(knockback, transform);
+            enemy.GetComponent<EnemyController>().TakeDamage(dmg);
+            enemy.GetComponent<EnemyController>().TakeKnockback(knockback, transform);
         }
     }
 
@@ -141,12 +141,12 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(enemyCheck.position, attackRange);
     }
 
-    void GetClosestEnemy(List<Enemy> enemiesList)
+    void GetClosestEnemy(List<EnemyController> enemiesList)
     {
-        Enemy closestTarget = null;
+        EnemyController closestTarget = null;
         float closestDistSqr = Mathf.Infinity;
         Vector3 currentPos = transform.position;
-        foreach(Enemy enemy in enemiesList)
+        foreach(EnemyController enemy in enemiesList)
         {
             Vector3 directionToTarget = enemy.transform.position - currentPos;
             float distSqrToTarget = directionToTarget.sqrMagnitude;

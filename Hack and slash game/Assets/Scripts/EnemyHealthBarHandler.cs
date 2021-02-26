@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyHealthBarHandler : MonoBehaviour
 {
     private static Image healthBarImage;
-    public static Enemy target;
+    public static EnemyController target;
 
     /// <summary>
     /// Sets the health bar value
@@ -22,12 +22,12 @@ public class EnemyHealthBarHandler : MonoBehaviour
         return healthBarImage.fillAmount;
     }
 
-    public static void SetTarget(Enemy targetEnemy)
+    public static void SetTarget(EnemyController targetEnemy)
     {
         target = targetEnemy;
     }
 
-    public static Enemy GetTarget()
+    public static EnemyController GetTarget()
     {
         return target;
     }

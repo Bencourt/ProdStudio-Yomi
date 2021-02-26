@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public int maxHealth = 100;
@@ -40,16 +40,16 @@ public class Enemy : MonoBehaviour
 
         if (GetComponent<EnemyBehavior>().enemyState == state.attack && !attacked && Time.time >= attackWindupTime)
         {
-                Debug.Log("Attacked");
-                attacked = true;
-                Attack();
-                attackTime = Time.time + 1f / attackRate;
+            Debug.Log("Attacked");
+            attacked = true;
+            Attack();
+            attackTime = Time.time + 1f / attackRate;
         }
         if (GetComponent<EnemyBehavior>().enemyState == state.attack && Time.time >= attackTime && attacked)
         {
             Debug.Log("attacking");
-                attacked = false;
-                attackWindupTime = Time.time + 1f / attackWindup;
+            attacked = false;
+            attackWindupTime = Time.time + 1f / attackWindup;
         }
 
         if (currentHealth <= 0)
@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damageValue)
     {
         currentHealth -= damageValue;
-        if(GetComponent<EnemyBehavior>().enemyState == state.attack)
+        if (GetComponent<EnemyBehavior>().enemyState == state.attack)
         {
             attackTime = Time.time + 1f / attackRate;
         }
@@ -115,11 +115,10 @@ public class Enemy : MonoBehaviour
 
     public float GetCurrentHealth()
     {
-        if (currentHealth/100 < 0)
+        if (currentHealth / 100 < 0)
         {
             return 0;
         }
-        return currentHealth/100;
+        return currentHealth / 100;
     }
-
 }
