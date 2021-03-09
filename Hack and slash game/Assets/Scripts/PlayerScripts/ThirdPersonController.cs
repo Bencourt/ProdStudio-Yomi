@@ -23,10 +23,14 @@ public class ThirdPersonController : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
+    public Animator anim;
+
     void Start()
     {
         speed = walkSpeed;
         gravity = fallGravity;
+        anim.SetBool("isRunning", false);
+        anim.SetBool("attack1", false);
     }
 
     // Update is called once per frame
@@ -59,7 +63,7 @@ public class ThirdPersonController : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-
+            anim.SetBool("isRunning", true);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmooth);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -67,6 +71,12 @@ public class ThirdPersonController : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             characterController.Move(moveDirection.normalized * speed * Time.deltaTime);
         }
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+
+
         if(Input.GetAxis("Sprint") >= .1f)
         {
             speed = sprintSpeed;
