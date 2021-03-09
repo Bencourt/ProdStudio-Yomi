@@ -11,6 +11,7 @@ public class MenuHandler : MonoBehaviour
     public GameObject pauseMenuUI;
     public Button returnToGameButton;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,7 @@ public class MenuHandler : MonoBehaviour
         inGameUI.SetActive(true);
         pauseMenuUI.SetActive(false);
         inGame = true;
-        returnToGameButton.onClick.AddListener(ReturnToGame);
+        returnToGameButton.onClick.AddListener(Resume);
     }
 
     // Update is called once per frame
@@ -34,25 +35,32 @@ public class MenuHandler : MonoBehaviour
         {
             if (inGame)
             {
-                pauseMenu = true;
-                inGame = false;
-                inGameUI.SetActive(false);
-                pauseMenuUI.SetActive(true);
+                Pause();
                 return;
             }
             if (pauseMenu)
             {
-                ReturnToGame();
+                Resume();
                 return;
             }
         }
     }
 
-    void ReturnToGame()
+    void Resume()
     {
         pauseMenu = false;
         inGame = true;
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
+    void Pause()
+    {
+        pauseMenu = true;
+        inGame = false;
+        inGameUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
