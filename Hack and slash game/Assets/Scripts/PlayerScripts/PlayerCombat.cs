@@ -30,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
     public int maxHealth = 100;
     float currentHealth;
 
+    public Animator anim;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -60,6 +62,8 @@ public class PlayerCombat : MonoBehaviour
         {
             attacked = false;
             attacked2 = false;
+            anim.SetBool("attack1", false);
+
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -68,10 +72,12 @@ public class PlayerCombat : MonoBehaviour
                 Debug.Log("Attacked");
                 Attack(damage, knockback1);
                 attackTime = Time.time + 1f / attackRate;
+                anim.SetBool("attack1", true);
                 attacked = true;
             }
             else if(Time.time < attackTime && Time.time >= attackTime2 && attacked && !attacked2)
             {
+                anim.SetBool("attack1", false);
                 Debug.Log("Attacked2");
                 Attack(damage2, knockback1);
                 attacked2 = true;
