@@ -10,6 +10,7 @@ TagManager:
   - EquipmentManager
   - InGameUI
   - PauseMenuUI
+  - ItemButton
   layers:
   - Default
   - TransparentFX

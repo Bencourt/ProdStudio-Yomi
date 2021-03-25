@@ -9,6 +9,9 @@ public class Item : MonoBehaviour
     public string desc;
     public Sprite icon;
     public bool pickedUp;
+    int amntToHeal;
+
+    public GameObject player;
 
     [HideInInspector]
     public bool used;
@@ -45,7 +48,6 @@ public class Item : MonoBehaviour
     {
         if(used)
         {
-            int amntToHeal = 0;
             switch (ID)
             {
                 case 0:
@@ -62,7 +64,7 @@ public class Item : MonoBehaviour
         }
     }
 
-    public void itemUseage()
+    public void ItemUseage()
     {
         // weapon 
         if(type == "Weapon")
@@ -73,8 +75,9 @@ public class Item : MonoBehaviour
         // health potion
         if(type == "HP")
         {
-            
             used = true;
+            amntToHeal = 10; // ****************************************************  NEEDS TO BE FIXED **********************
+            player.GetComponent<PlayerCombat>().HealDamage(amntToHeal);
         }
 
         // hi gamers stream bring me the horizon

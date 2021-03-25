@@ -28,7 +28,7 @@ public class PlayerCombat : MonoBehaviour
     public Vector3 knockbackDirection;
 
     public int maxHealth = 100;
-    float currentHealth;
+    public float currentHealth;
 
     public Animator anim;
 
@@ -113,6 +113,16 @@ public class PlayerCombat : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    public void HealDamage(int potionValue)
+    {
+        currentHealth += potionValue;
+
+        if (currentHealth >= 100)
+        {
+            currentHealth = 100;
         }
     }
 

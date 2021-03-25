@@ -13,6 +13,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     public GameObject item;
     public string desc;
 
+    public Sprite baseIcon;
+
     public Transform slotIconGO;
 
     public void OnPointerClick(PointerEventData pointerEventData)
@@ -32,6 +34,28 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void UseItem()
     {
-        item.GetComponent<Item>().itemUseage();
+        item.GetComponent<Item>().ItemUseage();
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "Item" || child.tag == "ItemButton")
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            else
+            {
+                child.GetComponent<Image>().sprite = baseIcon;
+            }
+        }
+        ResetSlot();
+    }
+
+    public void ResetSlot()
+    {
+        empty = true;
+        icon = null;
+        type = null;
+        ID = 0;
+        item = null;
+        desc = null;
     }
 }

@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
     public GameObject inventory;
     public GameObject slotHolder;
 
+    public GameObject itemButton;
+
     private int allSlots;
     private int enabledSlots;
     private GameObject[] slot;
@@ -69,6 +71,10 @@ public class Inventory : MonoBehaviour
 
                 slot[i].GetComponent<Slot>().UpdateSlot();
                 slot[i].GetComponent<Slot>().empty = false;
+
+                GameObject tempButton = Instantiate(itemButton, slot[i].transform, false);
+                tempButton.tag = "ItemButton";
+
                 break;
             }
         }
