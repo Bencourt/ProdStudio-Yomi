@@ -30,6 +30,7 @@ public class ThirdPersonController : MonoBehaviour
         speed = walkSpeed;
         gravity = fallGravity;
         anim.SetBool("isRunning", false);
+        anim.SetBool("isWalking", false);
         anim.SetBool("attack1", false);
     }
 
@@ -63,7 +64,7 @@ public class ThirdPersonController : MonoBehaviour
 
         if (direction.magnitude >= 0.1f)
         {
-            anim.SetBool("isRunning", true);
+            anim.SetBool("isWalking", true);
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + playerCam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVel, turnSmooth);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -73,16 +74,18 @@ public class ThirdPersonController : MonoBehaviour
         }
         else
         {
-            anim.SetBool("isRunning", false);
+            anim.SetBool("isWalking", false);
         }
 
 
         if(Input.GetAxis("Sprint") >= .1f)
         {
+            anim.SetBool("isRunning", true);
             speed = sprintSpeed;
         }
         else
         {
+            anim.SetBool("isRunning", false);
             speed = walkSpeed;
         }
     }

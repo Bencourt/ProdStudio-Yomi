@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
+
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -63,6 +63,8 @@ public class PlayerCombat : MonoBehaviour
             attacked = false;
             attacked2 = false;
             anim.SetBool("attack1", false);
+            anim.SetBool("attack2", false);
+            anim.SetBool("attack3", false);
 
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -77,7 +79,7 @@ public class PlayerCombat : MonoBehaviour
             }
             else if(Time.time < attackTime && Time.time >= attackTime2 && attacked && !attacked2)
             {
-                anim.SetBool("attack1", false);
+                anim.SetBool("attack2", true);
                 Debug.Log("Attacked2");
                 Attack(damage2, knockback1);
                 attacked2 = true;
@@ -86,6 +88,7 @@ public class PlayerCombat : MonoBehaviour
             else if (Time.time < attackTime2 && Time.time >= attackTime3 && attacked2)
             {
                 Debug.Log("Attacked3");
+                anim.SetBool("attack3", true);
                 Attack(damage3, knockback2);
                 attackTime3 = Time.time + 1f / attackRate;
             }

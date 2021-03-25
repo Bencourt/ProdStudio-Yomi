@@ -65,8 +65,8 @@ public class EnemyController : MonoBehaviour
         foreach (Collider player in hitPlayer)
         {
             Debug.Log("hit player name:" + player.name);
-            player.GetComponent<PlayerCombat>().TakeDamage(damage);
-            player.GetComponent<PlayerCombat>().TakeKnockback(damage, transform);
+            playerCombat.TakeDamage(damage);
+            playerCombat.TakeKnockback(damage, transform);
         }
     }
 
