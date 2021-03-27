@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public bool inventoryEnabled;
     public GameObject inventory;
     public GameObject slotHolder;
 
@@ -29,17 +28,6 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-            inventoryEnabled = !inventoryEnabled;
-
-        if(inventoryEnabled)
-        {
-            inventory.SetActive(true);
-        }
-        else
-        {
-            inventory.SetActive(false);
-        }
     }
 
     private void OnTriggerEnter(Collider other)

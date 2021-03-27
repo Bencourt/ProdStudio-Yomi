@@ -7,8 +7,10 @@ public class MenuHandler : MonoBehaviour
 {
     public bool pauseMenu;
     public bool inGame;
+    public bool inventoryMenu;
     public GameObject inGameUI;
     public GameObject pauseMenuUI;
+    public GameObject inventoryUI;
     public Button returnToGameButton;
 
 
@@ -20,6 +22,9 @@ public class MenuHandler : MonoBehaviour
         pauseMenuUI.SetActive(false);
         inGame = true;
         returnToGameButton.onClick.AddListener(Resume);
+        inventoryMenu = false;
+        inventoryUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -44,6 +49,27 @@ public class MenuHandler : MonoBehaviour
                 return;
             }
         }
+        if (Input.GetKeyDown(KeyCode.E) && inGame)
+        {
+            if(!inventoryMenu)
+            {
+                inventoryMenu = true;
+                inventoryUI.SetActive(true);
+                Time.timeScale = 0f;
+                Cursor.lockState = CursorLockMode.None;
+                return;
+            }
+            if(inventoryMenu)
+            {
+                inventoryMenu = false;
+                inventoryUI.SetActive(false);
+                Time.timeScale = 1f;
+                Cursor.lockState = CursorLockMode.Locked;
+                return;
+            }
+
+        }
+           
     }
 
     void Resume()
@@ -53,6 +79,7 @@ public class MenuHandler : MonoBehaviour
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Pause()
@@ -62,5 +89,6 @@ public class MenuHandler : MonoBehaviour
         inGameUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
