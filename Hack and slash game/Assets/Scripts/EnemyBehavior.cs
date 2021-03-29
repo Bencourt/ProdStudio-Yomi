@@ -28,11 +28,18 @@ public class EnemyBehavior : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
+
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         enemyState = state.idle;
         gravity = fallGravity;
+        anim.SetBool("isIdle", true);
+        anim.SetBool("isChase", false);
+        anim.SetBool("isAttackWindup", false);
+        anim.SetBool("isAttack", false);
     }
 
     // Update is called once per frame
@@ -52,16 +59,25 @@ public class EnemyBehavior : MonoBehaviour
         {
             //Debug.Log("attack distance");
             enemyState = state.attack;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isChase", false);
+            anim.SetBool("isAttackWindup", true);
         }
         else if(Physics.OverlapSphere(characterDistance.position, chaseDistance, playerLayer).Length > 0)
         {
             //Debug.Log("chase distance");
             enemyState = state.chase;
+            anim.SetBool("isIdle", false);
+            anim.SetBool("isChase", true);
+            anim.SetBool("isAttackWindup", false);
         }
         else
         {
             //Debug.Log("idle distance");
             enemyState = state.idle;
+            anim.SetBool("isIdle", true);
+            anim.SetBool("isChase", false);
+            anim.SetBool("isAttackWindup", false);
         }
 
         switch(enemyState){

@@ -24,6 +24,8 @@ public class EnemyController : MonoBehaviour
     public float attackRate = 2f;
     float attackTime = 0.0f;
 
+    public Animator anim;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -41,12 +43,14 @@ public class EnemyController : MonoBehaviour
         if (GetComponent<EnemyBehavior>().enemyState == state.attack && !attacked && Time.time >= attackWindupTime)
         {
             Debug.Log("Attacked");
+            anim.SetBool("isAttack", true);
             attacked = true;
             Attack();
             attackTime = Time.time + 1f / attackRate;
         }
         if (GetComponent<EnemyBehavior>().enemyState == state.attack && Time.time >= attackTime && attacked)
         {
+            anim.SetBool("isAttack", false);
             Debug.Log("attacking");
             attacked = false;
             attackWindupTime = Time.time + 1f / attackWindup;
