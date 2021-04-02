@@ -18,7 +18,9 @@ public class PlayerCombat : MonoBehaviour
     public int knockback2 = 40;
     private bool attacked;
     private bool attacked2;
+
     public GameObject enemyUI;
+    public GameObject inGameUI;
 
     public float attackRate = 2f;
     float attackTime = 0.0f;
@@ -45,8 +47,6 @@ public class PlayerCombat : MonoBehaviour
             enemies.Add(enemiesArray[i].gameObject.GetComponent<EnemyController>());
             //Debug.Log(enemies[0].name);
         }
-
-        enemyUI = GameObject.FindGameObjectWithTag("EnemyUI");
     }
 
     // Update is called once per frame
@@ -93,7 +93,6 @@ public class PlayerCombat : MonoBehaviour
                 attackTime3 = Time.time + 1f / attackRate;
             }
         }
-        PlayerHealthBarHandler.SetHealthBarValue(currentHealth / 100); // Changes health bar in HealthBarHandler Script
         GetClosestEnemy(enemies);
     }
 
@@ -112,7 +111,7 @@ public class PlayerCombat : MonoBehaviour
     public void TakeDamage(int damageValue)
     {
         currentHealth -= damageValue;
-
+        PlayerHealthBarHandler.SetHealthBarValue(currentHealth / 100); // Changes health bar in HealthBarHandler Script
         if (currentHealth <= 0)
         {
             Die();
@@ -183,6 +182,9 @@ public class PlayerCombat : MonoBehaviour
         {
             enemyUI.SetActive(true);
         }
-        EnemyHealthBarHandler.SetHealthBarValue(closestTarget.currentHealth/100);
+        if (enemies.Count > 0)
+        {
+            EnemyHealthBarHandler.SetHealthBarValue(closestTarget.currentHealth / 100);
+        }
     }
 }

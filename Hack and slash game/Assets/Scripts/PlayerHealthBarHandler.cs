@@ -14,18 +14,6 @@ public class PlayerHealthBarHandler : MonoBehaviour
     public static void SetHealthBarValue(float value)
     {
         healthBarImage.fillAmount = value;
-        if (healthBarImage.fillAmount < 0.2f)
-        {
-            SetHealthBarColor(Color.red);
-        }
-        else if (healthBarImage.fillAmount < 0.4f)
-        {
-            SetHealthBarColor(Color.yellow);
-        }
-        else
-        {
-            SetHealthBarColor(Color.green);
-        }
     }
 
     public static float GetHealthBarValue()

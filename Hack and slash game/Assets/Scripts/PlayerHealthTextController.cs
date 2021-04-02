@@ -12,7 +12,6 @@ public class PlayerHealthTextController : MonoBehaviour
     void Start()
     {
         healthText = GetComponent<Text>();
-        AssignHealthValue();
     }
 
     // Update is called once per frame
