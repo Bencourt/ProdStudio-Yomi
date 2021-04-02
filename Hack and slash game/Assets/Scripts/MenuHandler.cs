@@ -16,6 +16,7 @@ public class MenuHandler : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject inventoryIcon;
     public GameObject mainMenuUI;
+    public GameObject optionsUI;
 
     public Button returnToGameButton;
     public Button quitButton;
@@ -24,9 +25,12 @@ public class MenuHandler : MonoBehaviour
     public Button pauseOptionsButton;
     public Button saveButton;
     public Button exitToMenuButton;
+    public Button backButton;
 
     public Camera inGameCamera;
     public Camera mainMenuCamera;
+
+    public int lastState; // 0 = MainMenu ; 1 = PauseMenu
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,7 @@ public class MenuHandler : MonoBehaviour
         pauseMenuUI.SetActive(false);
         inventoryUI.SetActive(false);
         inventoryIcon.SetActive(false);
+        optionsUI.SetActive(false);
 
         returnToGameButton.onClick.AddListener(Resume);
         quitButton.onClick.AddListener(Quit);
@@ -50,11 +55,15 @@ public class MenuHandler : MonoBehaviour
         pauseOptionsButton.onClick.AddListener(Options);
         saveButton.onClick.AddListener(Save);
         exitToMenuButton.onClick.AddListener(Exit);
+        backButton.onClick.AddListener(Back);
 
         mainMenuCamera.enabled = true;
         inGameCamera.enabled = false;
 
-        //Cursor.lockState = CursorLockMode.Locked;
+        lastState = 0;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     // Update is called once per frame
@@ -87,7 +96,7 @@ public class MenuHandler : MonoBehaviour
                 inventoryUI.SetActive(true);
                 inventoryIcon.SetActive(false);
                 Time.timeScale = 0f;
-                //Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.None;
                 return;
             }
             if(inventoryMenu)
@@ -96,7 +105,7 @@ public class MenuHandler : MonoBehaviour
                 inventoryUI.SetActive(false);
                 inventoryIcon.SetActive(true);
                 Time.timeScale = 1f;
-                //Cursor.lockState = CursorLockMode.Locked;
+                Cursor.lockState = CursorLockMode.Locked;
                 return;
             }
 
@@ -111,7 +120,8 @@ public class MenuHandler : MonoBehaviour
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
         Time.timeScale = 1f;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Pause()
@@ -121,7 +131,8 @@ public class MenuHandler : MonoBehaviour
         inGameUI.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        //Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Quit()
@@ -136,14 +147,47 @@ public class MenuHandler : MonoBehaviour
 
         mainMenuUI.SetActive(false);
         inGameUI.SetActive(true);
+        inventoryIcon.SetActive(true);
 
         mainMenuCamera.enabled = false;
         inGameCamera.enabled = true;
+
+        lastState = 1;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void Back()
+    {
+        optionsMenu = false;
+        optionsUI.SetActive(false);
+        if(lastState == 0) // Main Menu
+        {
+            mainMenu = true;
+            mainMenuUI.SetActive(true);
+        }
+        else if (lastState == 1) // Pause Menu
+        {
+            pauseMenu = true;
+            pauseMenuUI.SetActive(true);
+        }
     }
 
     void Options()
     {
-
+        if(lastState == 0) // Main Menu
+        {
+            mainMenu = false;
+            mainMenuUI.SetActive(false);
+        }
+        else if (lastState == 1) // Pause Menu
+        {
+            pauseMenu = false;
+            pauseMenuUI.SetActive(false);
+        }
+        optionsMenu = true;
+        optionsUI.SetActive(true);
     }
 
     void Save()
@@ -154,12 +198,18 @@ public class MenuHandler : MonoBehaviour
     void Exit()
     {
         inGame = false;
+        pauseMenu = false;
         mainMenu = true;
 
         inGameUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
         mainMenuUI.SetActive(true);
 
         inGameCamera.enabled = false;
         mainMenuCamera.enabled = true;
+
+        lastState = 0;
+
+        Time.timeScale = 1f;
     }
 }
