@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637521960346907505
+  lastModified: 637530100196937970
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -42,7 +42,7 @@ MonoBehaviour:
   - {fileID: 2999450185424822264}
   StringsBanks:
   - {fileID: -8316208670415075429}
-  stringsBankWriteTime: 637521960346907505
+  stringsBankWriteTime: 637530100196937970
   cacheVersion: 6
 --- !u!114 &2999450185424822264
 MonoBehaviour:
@@ -59,7 +59,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637521960346897489
+  lastModified: 637530100196937970
   LoadResult: 0
   FileSizes: []
   Exists: 1

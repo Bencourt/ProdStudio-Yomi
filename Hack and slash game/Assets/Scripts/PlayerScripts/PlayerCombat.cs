@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerCombat : MonoBehaviour
@@ -149,6 +150,7 @@ public class PlayerCombat : MonoBehaviour
         //Debug.Log("Player died!");
         GetComponent<CharacterController>().enabled = false;
         GetComponent<ThirdPersonController>().enabled = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         this.enabled = false;
     }
 

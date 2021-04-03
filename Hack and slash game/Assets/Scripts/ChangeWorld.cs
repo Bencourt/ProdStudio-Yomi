@@ -9,11 +9,11 @@ public class ChangeWorld : MonoBehaviour
     public LayerMask playerLayer;
     public Transform portalTransform;
     public Scene realWorldScene;
-
+    public BoxCollider cube;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(portalTransform.position + ", " + new Vector3(10, 0, 1) + ", " + portalTransform.rotation + ", ");
+        Debug.Log(portalTransform.position + ", " + new Vector3(10, 20, 1) + ", " + portalTransform.rotation + ", ");
         //SceneManager.LoadScene(sceneName: "SampleScene");
     }
 
@@ -21,7 +21,7 @@ public class ChangeWorld : MonoBehaviour
     void Update()
     {
         //Physics.CheckBox(this.transform.position, new Vector3(10,0),new Quaternion(0,0,0,0),playerLayer)
-        if (Physics.CheckBox(portalTransform.position, new Vector3(15, 20, 1), Quaternion.identity, playerLayer))
+        if (Physics.CheckBox(portalTransform.position, new Vector3(9, 20, 1), portalTransform.rotation, playerLayer))
         {
             if (SceneManager.GetActiveScene().name == "SampleScene")
             {
