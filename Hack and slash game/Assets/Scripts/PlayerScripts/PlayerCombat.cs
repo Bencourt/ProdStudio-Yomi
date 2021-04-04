@@ -150,7 +150,7 @@ public class PlayerCombat : MonoBehaviour
         //Debug.Log("Player died!");
         GetComponent<CharacterController>().enabled = false;
         GetComponent<ThirdPersonController>().enabled = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("SampleScene");
         this.enabled = false;
     }
 

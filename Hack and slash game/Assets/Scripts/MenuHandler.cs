@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -35,14 +36,24 @@ public class MenuHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu = true;
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            mainMenu = true;
+            mainMenuUI.SetActive(true);
+            inGame = false;
+            inGameUI.SetActive(false);
+        }
+        else
+        {
+            mainMenu = false;
+            mainMenuUI.SetActive(false);
+            inGame = true;
+            inGameUI.SetActive(true);
+        }
         pauseMenu = false;
-        inGame = false;
         inventoryMenu = false;
         optionsMenu = false;
 
-        mainMenuUI.SetActive(true);
-        inGameUI.SetActive(false);
         pauseMenuUI.SetActive(false);
         inventoryUI.SetActive(false);
         inventoryIcon.SetActive(false);
