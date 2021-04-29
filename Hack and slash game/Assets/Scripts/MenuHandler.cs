@@ -13,6 +13,7 @@ public class MenuHandler : MonoBehaviour
     public bool optionsMenu;
 
     public GameObject inGameUI;
+    public GameObject dialogUI;
     public GameObject pauseMenuUI;
     public GameObject inventoryUI;
     public GameObject inventoryIcon;
@@ -42,6 +43,8 @@ public class MenuHandler : MonoBehaviour
             mainMenuUI.SetActive(true);
             inGame = false;
             inGameUI.SetActive(false);
+            mainMenuCamera.enabled = true;
+            inGameCamera.enabled = false;
         }
         else
         {
@@ -49,6 +52,8 @@ public class MenuHandler : MonoBehaviour
             mainMenuUI.SetActive(false);
             inGame = true;
             inGameUI.SetActive(true);
+            mainMenuCamera.enabled = false;
+            inGameCamera.enabled = true;
         }
         pauseMenu = false;
         inventoryMenu = false;
@@ -67,9 +72,6 @@ public class MenuHandler : MonoBehaviour
         saveButton.onClick.AddListener(Save);
         exitToMenuButton.onClick.AddListener(Exit);
         backButton.onClick.AddListener(Back);
-
-        mainMenuCamera.enabled = true;
-        inGameCamera.enabled = false;
 
         lastState = 0;
 
@@ -93,7 +95,7 @@ public class MenuHandler : MonoBehaviour
                 Pause();
                 return;
             }
-            if (pauseMenu)
+            else if (pauseMenu)
             {
                 Resume();
                 return;
@@ -110,7 +112,7 @@ public class MenuHandler : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 return;
             }
-            if(inventoryMenu)
+            else if(inventoryMenu)
             {
                 inventoryMenu = false;
                 inventoryUI.SetActive(false);
@@ -121,6 +123,16 @@ public class MenuHandler : MonoBehaviour
             }
 
         }
+        if(dialogUI.activeSelf == true)
+        {
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if(dialogUI.activeSelf == false)
+        {
+            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
            
     }
 
@@ -130,6 +142,9 @@ public class MenuHandler : MonoBehaviour
         inGame = true;
         pauseMenuUI.SetActive(false);
         inGameUI.SetActive(true);
+        inventoryUI.SetActive(false);
+        inventoryIcon.SetActive(true);
+        dialogUI.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -158,6 +173,7 @@ public class MenuHandler : MonoBehaviour
 
         mainMenuUI.SetActive(false);
         inGameUI.SetActive(true);
+        dialogUI.SetActive(false);
         inventoryIcon.SetActive(true);
 
         mainMenuCamera.enabled = false;

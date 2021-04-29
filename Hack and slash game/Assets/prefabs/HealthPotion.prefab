@@ -222,7 +222,7 @@ MonoBehaviour:
   desc: A health potion that heals 10 health
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   pickedUp: 0
-  player: {fileID: 0}
+  player: {fileID: 5019732340548275966, guid: d6975303aa214fe47a7b28880aa24230, type: 3}
   used: 0
   equipped: 0
   equipment: {fileID: 0}

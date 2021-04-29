@@ -13,6 +13,12 @@ public class Inventory : MonoBehaviour
     private int enabledSlots;
     private GameObject[] slot;
 
+    public GameObject[] Slot
+    {
+        get { return slot; }
+    }
+
+
     void Start()
     {
         allSlots = 16;
