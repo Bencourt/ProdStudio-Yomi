@@ -420,7 +420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Rooftop Villager
+    sentences:
+    - Oh god I really shouldn't have come up here, I'm so afriad of heights!
+    - I want to find a way down, but I'm too scared to move!
   progression: 0
 --- !u!4 &23993769 stripped
 Transform:
@@ -3862,6 +3866,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1478989422}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &217275047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217275046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f75cb1d27e40240b70eab758f77821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest:
+    type: 1
+    questOrder: 2
+    description: Report back to Chef John
+    itemID: 0
+    NPC: {fileID: 388519227}
 --- !u!114 &217275049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3874,7 +3896,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Sue
+    sentences:
+    - Huh? What do you want?
+    - 'Don''t go think you can go running through here just because Harry''s gone. '
+    - ...
+    - I apologize.
+    - I shouldn't have lashed out at you like that.
+    - I know Harry was never particularly kind to you. You two were easy targets
+      for him.
+    - 'I just wish I he had forgotten about me so that I wouldn''t have the burden
+      of this damn old farm. '
+    - I can't even grow enough food to keep myself fed.
+    - You said John sent you? I appreciate his offer, but I can't accept his help
+      or anything.
+    - I wouldn't want to be a burden on him.
+  - name: Sue
+    sentences:
+    - Like I said, I don't want to be a burden on anyone, so don't feel like you
+      have to do anything for me. Okay?
   progression: 0
 --- !u!4 &227314813 stripped
 Transform:
@@ -6028,6 +6069,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3262893156575438375}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &388519228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388519227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f75cb1d27e40240b70eab758f77821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quest:
+    type: 1
+    questOrder: 3
+    description: Explore the East woods for Chef John
+    itemID: 0
+    NPC: {fileID: 0}
 --- !u!114 &388519230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6044,10 +6103,25 @@ MonoBehaviour:
   - name: Chef John
     sentences:
     - Hey there, you were at the funeral earlier, weren't you?
-    - 'I was hoping to make a couple of meals for Sue since she''s takin it so hard. '
-    - Do you think you could gather three vegetables for me to use?
-    - You should be able to find some if you take the East road out of town into
-      the woods.
+    - I want to do something for Sue since she's taking this all so hard.
+    - I know she and her dad had some... issues, but he was all she had.
+    - Do you think you could go talk to her for me? She's out in front of her old
+      man's house near the farm.
+  - name: Chef John
+    sentences:
+    - Can you let me know if she needs anything? I really want to try and help her
+      out.
+    - She's out in front of her old man's house near the farm.
+  - name: Chef John
+    sentences:
+    - Did you talk to Sue? How is she doing?
+    - ...
+    - So she's struggling to keep the farm producing?
+    - Even if she says she doesn't want any help, I can't just let her struggle without
+      doing anything.
+    - I think I'd like to make her a couple of meals just to help, could you explore
+      the East woods for me to see if you can find any vegetables for me to cook
+      with?
   progression: 0
 --- !u!114 &388519231
 MonoBehaviour:
@@ -6062,11 +6136,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quest:
-    type: 0
+    type: 1
     questOrder: 1
-    description: Gather 3 vegetables from the woods to the east
-    itemID: 2
-    NPC: {fileID: 0}
+    description: Speak with Sue at her Father's house near the farm
+    itemID: 0
+    NPC: {fileID: 217275046}
 --- !u!4 &389475893 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5353400546931680205, guid: 7d0827b3324efd04a81056334e5cbd77,
@@ -6864,7 +6938,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Innkeeper
+    sentences:
+    - Welcome to the Inn, can I help you?
+    - Oh wait sorry, we're all full up at the moment with the knights visiting.
   progression: 0
 --- !u!1001 &523040103
 PrefabInstance:
@@ -9885,6 +9963,7 @@ MonoBehaviour:
   DialogText: {fileID: 119303529}
   dialogOpen: 0
   dialogBox: {fileID: 1938746171}
+  NPC: {fileID: 0}
 --- !u!4 &697911380
 Transform:
   m_ObjectHideFlags: 0
@@ -11699,7 +11778,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Box Herder
+    sentences:
+    - Day in and day out I just stand here watching these boxes.
+    - 'My brother told me to make sure they don''t run away. '
+    - I don't know what kind of boxes get up and move on their own, but I trust my
+      brother.
   progression: 0
 --- !u!1 &894434485
 GameObject:
@@ -13907,7 +13992,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Box Herder's Brother
+    sentences:
+    - He's about as sharp as a marble, isn't he?
+    - I told him to herd those boxes as a joke, but he just stands there now day
+      in and day out.
   progression: 0
 --- !u!1 &1025305500
 GameObject:
@@ -22303,7 +22393,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76249c795dc5e164498e4921d6bfb2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogElements: []
+  dialogElements:
+  - name: Shopkeep
+    sentences:
+    - Have you seen the old house by the pond lately?
+    - I think someone has been going out there to visit it recently, even though
+      the building has been abandoned for over a year.
   progression: 0
 --- !u!1 &1604988557
 GameObject:
@@ -30856,7 +30951,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134665831}
-  m_LocalRotation: {x: 0.103549875, y: 0.39895207, z: -0.045398455, w: 0.9099746}
+  m_LocalRotation: {x: 0.103549875, y: 0.39895207, z: -0.045398448, w: 0.9099746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

@@ -92,6 +92,7 @@ public class QuestManager : MonoBehaviour
 
     public void CompleteQuest()
     {
+        activeQuest.NPC.GetComponent<DialogElement>().progression++;
         activeQuest = null;
         questProgression++;
         if(questQueue.Count > 0)
