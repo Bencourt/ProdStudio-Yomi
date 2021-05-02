@@ -34,6 +34,9 @@ public class MenuHandler : MonoBehaviour
 
     public int lastState; // 0 = MainMenu ; 1 = PauseMenu
 
+    FMOD.Studio.EventInstance buttonClick;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,10 +68,12 @@ public class MenuHandler : MonoBehaviour
         optionsUI.SetActive(false);
 
         returnToGameButton.onClick.AddListener(Resume);
+        returnToGameButton.onClick.AddListener(PlaySound);
         quitButton.onClick.AddListener(Quit);
         playButton.onClick.AddListener(StartGame);
         menuOptionsButton.onClick.AddListener(Options);
         pauseOptionsButton.onClick.AddListener(Options);
+        pauseOptionsButton.onClick.AddListener(PlaySound);
         saveButton.onClick.AddListener(Save);
         exitToMenuButton.onClick.AddListener(Exit);
         backButton.onClick.AddListener(Back);
@@ -77,6 +82,8 @@ public class MenuHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        buttonClick = FMODUnity.RuntimeManager.CreateInstance("event:/UI-Button");
     }
 
     // Update is called once per frame
@@ -163,11 +170,15 @@ public class MenuHandler : MonoBehaviour
 
     void Quit()
     {
+        PlaySound();
+
         Application.Quit();
     }
 
     void StartGame()
     {
+        PlaySound();
+
         mainMenu = false;
         inGame = true;
 
@@ -187,6 +198,8 @@ public class MenuHandler : MonoBehaviour
 
     void Back()
     {
+        PlaySound();
+
         optionsMenu = false;
         optionsUI.SetActive(false);
         if(lastState == 0) // Main Menu
@@ -203,7 +216,9 @@ public class MenuHandler : MonoBehaviour
 
     void Options()
     {
-        if(lastState == 0) // Main Menu
+        PlaySound();
+
+        if (lastState == 0) // Main Menu
         {
             mainMenu = false;
             mainMenuUI.SetActive(false);
@@ -219,11 +234,13 @@ public class MenuHandler : MonoBehaviour
 
     void Save()
     {
-
+        PlaySound();
     }
 
     void Exit()
     {
+        PlaySound();
+
         inGame = false;
         pauseMenu = false;
         mainMenu = true;
@@ -238,5 +255,10 @@ public class MenuHandler : MonoBehaviour
         lastState = 0;
 
         Time.timeScale = 1f;
+    }
+
+    void PlaySound()
+    {
+        buttonClick.start();
     }
 }

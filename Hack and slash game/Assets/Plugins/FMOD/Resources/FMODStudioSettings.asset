@@ -415,7 +415,11 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
-  Banks: []
+  Banks:
+  - Ambient
+  - Buttons
+  - MC-Footsteps
+  - SK-Footsteps
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

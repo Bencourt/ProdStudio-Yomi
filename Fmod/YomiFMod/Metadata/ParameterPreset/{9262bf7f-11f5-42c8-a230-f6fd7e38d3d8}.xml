@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="ParameterPreset" id="{9262bf7f-11f5-42c8-a230-f6fd7e38d3d8}">
+		<property name="name">
+			<value>Footstep Panning</value>
+		</property>
+		<relationship name="folder">
+			<destination>{cd15200c-6efd-42f8-aa9f-f9878fef0cee}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{71588a61-70d7-4e14-a899-a946ca6d8488}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{71588a61-70d7-4e14-a899-a946ca6d8488}">
+		<property name="minimum">
+			<value>-1</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{a17ea7d0-8669-4479-bf59-35b2e9e4160a}</destination>
+		</relationship>
+	</object>
+	<object class="RandomizerModulator" id="{a17ea7d0-8669-4479-bf59-35b2e9e4160a}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+	</object>
+</objects>
