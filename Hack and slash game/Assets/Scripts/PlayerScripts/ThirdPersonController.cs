@@ -25,6 +25,8 @@ public class ThirdPersonController : MonoBehaviour
 
     public Animator anim;
 
+    public FMODUnity.StudioEventEmitter footsteps;
+
     void Start()
     {
         speed = walkSpeed;
@@ -32,6 +34,8 @@ public class ThirdPersonController : MonoBehaviour
         anim.SetBool("isRunning", false);
         anim.SetBool("isWalking", false);
         anim.SetBool("attack1", false);
+
+        footsteps.Play();
     }
 
     // Update is called once per frame
@@ -87,6 +91,24 @@ public class ThirdPersonController : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
             speed = walkSpeed;
+        }
+
+        FootstepHandler();
+    }
+
+    void FootstepHandler()
+    {
+        if (anim.GetBool("isWalking") == false && anim.GetBool("isRunning") == false)
+        {
+            footsteps.SetParameter("Speed", 0);
+        }
+        else if (speed == walkSpeed)
+        {
+            footsteps.SetParameter("Speed", 1);
+        }
+        else if (speed == sprintSpeed)
+        {
+            footsteps.SetParameter("Speed", 2);
         }
     }
 }

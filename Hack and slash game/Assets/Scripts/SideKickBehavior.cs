@@ -24,10 +24,15 @@ public class SideKickBehavior : MonoBehaviour
     bool isGrounded;
 
     public Animator anim;
+
+    public FMODUnity.StudioEventEmitter footsteps;
+
     // Start is called before the first frame update
     void Start()
     {
         gravity = fallGravity;
+
+        footsteps.Play();
     }
 
     // Update is called once per frame
@@ -69,6 +74,21 @@ public class SideKickBehavior : MonoBehaviour
         {
             //Debug.Log("warp distance");
             this.transform.position = new Vector3(Player.position.x, Player.position.y, Player.position.z - 3);
+        }
+
+        FootstepHandler();
+    }
+
+    void FootstepHandler()
+    {
+        if (anim.GetBool("isRunning") == false)
+        {
+            footsteps.SetParameter("Speed", 0);
+        }
+        else if (anim.GetBool("isRunning"))
+        {
+            footsteps.SetParameter("Speed", 1);
+            Debug.Log("running");
         }
     }
 }

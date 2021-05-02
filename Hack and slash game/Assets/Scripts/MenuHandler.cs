@@ -34,7 +34,7 @@ public class MenuHandler : MonoBehaviour
 
     public int lastState; // 0 = MainMenu ; 1 = PauseMenu
 
-    FMOD.Studio.EventInstance buttonClick;
+    public FMOD.Studio.EventInstance buttonClick;
 
 
     // Start is called before the first frame update

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="ParameterPreset" id="{d9a67626-a623-4c67-b500-d993012f0f28}">
 		<property name="name">
-			<value>MC-Speed</value>
+			<value>Speed</value>
 		</property>
 		<relationship name="folder">
 			<destination>{cd15200c-6efd-42f8-aa9f-f9878fef0cee}</destination>
@@ -16,14 +16,18 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>2</value>
+			<value>3</value>
 		</property>
 		<property name="enumerationLabels">
+			<value>Stop</value>
 			<value>Walk</value>
 			<value>Run</value>
 		</property>
 		<property name="initialValue">
 			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
 		</property>
 	</object>
 </objects>

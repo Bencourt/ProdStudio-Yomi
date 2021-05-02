@@ -11016,6 +11016,31 @@ CapsuleCollider:
   m_Height: 1.42
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &770317278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770317271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/MC-Footsteps
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  Params:
+  - Name: MC-Speed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &772638289
 GameObject:
   m_ObjectHideFlags: 0
@@ -25082,6 +25107,7 @@ GameObject:
   - component: {fileID: 1730471363}
   - component: {fileID: 1730471365}
   - component: {fileID: 1730471364}
+  - component: {fileID: 1730471366}
   m_Layer: 11
   m_Name: SideKick
   m_TagString: Untagged
@@ -25153,6 +25179,32 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   anim: {fileID: 1888211373}
+  footsteps: {fileID: 1730471366}
+--- !u!114 &1730471366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730471362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SK-Footsteps
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  Params:
+  - Name: Speed
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1741186120
 GameObject:
   m_ObjectHideFlags: 0
@@ -34897,6 +34949,11 @@ PrefabInstance:
       propertyPath: anim
       value: 
       objectReference: {fileID: 1672730144}
+    - target: {fileID: 5019732340548275964, guid: d6975303aa214fe47a7b28880aa24230,
+        type: 3}
+      propertyPath: footsteps
+      value: 
+      objectReference: {fileID: 770317278}
     - target: {fileID: 5019732340548275966, guid: d6975303aa214fe47a7b28880aa24230,
         type: 3}
       propertyPath: m_Name
