@@ -20,8 +20,13 @@ public class ThirdPersonController : MonoBehaviour
     float gravity;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
+    public float jumpSquat = .3f;
+    public float landingSquat = .3f;
     public LayerMask groundMask;
     bool isGrounded;
+    float stopJumping;
+    float stopLanding;
+    bool checkLanding;
 
     public Animator anim;
 
@@ -29,8 +34,11 @@ public class ThirdPersonController : MonoBehaviour
 
     void Start()
     {
+        checkLanding = true;
         speed = walkSpeed;
         gravity = fallGravity;
+        stopJumping = 0.0f;
+        stopLanding = 0.0f;
         anim.SetBool("isRunning", false);
         anim.SetBool("isWalking", false);
         anim.SetBool("attack1", false);
@@ -45,6 +53,21 @@ public class ThirdPersonController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical).normalized;
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (checkLanding == false && isGrounded == true)
+        {
+            anim.SetBool("isLanding", true);
+            stopLanding = Time.time + landingSquat;
+        }
+        checkLanding = isGrounded;
+        if(isGrounded)
+        {
+            anim.SetBool("isFalling", false);
+        }
+        else
+        {
+            anim.SetBool("isFalling", true);
+        }
+
         if(isGrounded && velocity.y > 0)
         {
             isGrounded = false;
@@ -58,10 +81,21 @@ public class ThirdPersonController : MonoBehaviour
         {
             velocity.y = jump;
             gravity = jumpGravity;
+            anim.SetBool("isJumping", true);
+            stopJumping = Time.time + jumpSquat;
         }
         if(!isGrounded && velocity.y < 0)
         {
             gravity = fallGravity;
+        }
+
+        if (stopLanding <= Time.time)
+        {
+            anim.SetBool("isLanding", false);
+        }
+        if (stopJumping <= Time.time)
+        {
+            anim.SetBool("isJumping", false);
         }
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
@@ -111,4 +145,5 @@ public class ThirdPersonController : MonoBehaviour
             footsteps.SetParameter("Speed", 2);
         }
     }
+
 }
