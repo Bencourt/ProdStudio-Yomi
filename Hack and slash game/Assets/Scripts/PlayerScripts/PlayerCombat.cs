@@ -8,17 +8,19 @@ using UnityEngine.SceneManagement;
 public class PlayerCombat : MonoBehaviour
 {
     public CharacterController characterController;
-    public Transform enemyCheck;
+    public CapsuleCollider enemyCheck;
     public float attackRange = 1;
     public LayerMask enemyLayer;
     public List<EnemyController> enemies = new List<EnemyController>();
+    private GameObject[] enemiesArray;
     public int damage = 30;
     public int damage2 = 25;
     public int damage3 = 40;
     public int knockback1 = 15;
     public int knockback2 = 40;
-    private bool attacked;
-    private bool attacked2;
+    public bool attacked;
+    public bool attacked2;
+    public bool attacked3;
 
     public GameObject enemyUI;
     public GameObject inGameUI;
@@ -40,13 +42,12 @@ public class PlayerCombat : MonoBehaviour
         currentHealth = maxHealth;
         attacked = false;
         attacked2 = false;
+        attacked3 = false;
 
-        GameObject[] enemiesArray = GameObject.FindGameObjectsWithTag("Enemies");
-        //Debug.Log(enemiesArray.Length);
+        enemiesArray = GameObject.FindGameObjectsWithTag("Enemies");
         for(int i = 0; i < enemiesArray.Length; i++)
         {
             enemies.Add(enemiesArray[i].gameObject.GetComponent<EnemyController>());
-            //Debug.Log(enemies[0].name);
         }
     }
 
@@ -63,6 +64,7 @@ public class PlayerCombat : MonoBehaviour
         {
             attacked = false;
             attacked2 = false;
+            attacked3 = false;
             anim.SetBool("attack1", false);
             anim.SetBool("attack2", false);
             anim.SetBool("attack3", false);
@@ -73,7 +75,6 @@ public class PlayerCombat : MonoBehaviour
             if (Time.time >= attackTime && !attacked)
             {
                 Debug.Log("Attacked");
-                Attack(damage, knockback1);
                 attackTime = Time.time + 1f / attackRate;
                 anim.SetBool("attack1", true);
                 attacked = true;
@@ -82,7 +83,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 anim.SetBool("attack2", true);
                 Debug.Log("Attacked2");
-                Attack(damage2, knockback1);
                 attacked2 = true;
                 attackTime2 = Time.time + 1f / attackRate;
             }
@@ -90,22 +90,38 @@ public class PlayerCombat : MonoBehaviour
             {
                 Debug.Log("Attacked3");
                 anim.SetBool("attack3", true);
-                Attack(damage3, knockback2);
+                attacked3 = true;
                 attackTime3 = Time.time + 1f / attackRate;
             }
         }
         GetClosestEnemy(enemies);
     }
 
-    void Attack(int dmg, int knockback)
+    public void Attack(GameObject hitCollider)
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(enemyCheck.position, attackRange, enemyLayer);
-
-        foreach (Collider enemy in hitEnemies)
+        foreach (GameObject e in enemiesArray)
         {
-            //Debug.Log("hit enemy name:" + enemy.name);
-            enemy.GetComponent<EnemyController>().TakeDamage(dmg);
-            enemy.GetComponent<EnemyController>().TakeKnockback(knockback, transform);
+            if (e == hitCollider)
+            {
+                if (!attacked && !attacked2)
+                {
+                    //Debug.Log("hit enemy name:" + enemy.name);
+                    hitCollider.GetComponent<EnemyController>().TakeDamage(damage);
+                    hitCollider.GetComponent<EnemyController>().TakeKnockback(knockback1, transform);
+                }
+                else if (attacked && !attacked2)
+                {
+                    //Debug.Log("hit enemy name:" + enemy.name);
+                    hitCollider.GetComponent<EnemyController>().TakeDamage(damage2);
+                    hitCollider.GetComponent<EnemyController>().TakeKnockback(knockback1, transform);
+                }
+                else if (attacked && attacked2)
+                {
+                    //Debug.Log("hit enemy name:" + enemy.name);
+                    hitCollider.GetComponent<EnemyController>().TakeDamage(damage3);
+                    hitCollider.GetComponent<EnemyController>().TakeKnockback(knockback2, transform);
+                }
+            }
         }
     }
 
@@ -152,13 +168,6 @@ public class PlayerCombat : MonoBehaviour
         GetComponent<ThirdPersonController>().enabled = false;
         SceneManager.LoadScene("SampleScene");
         this.enabled = false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        if (enemyCheck == null)
-            return;
-        Gizmos.DrawWireSphere(enemyCheck.position, attackRange);
     }
 
     void GetClosestEnemy(List<EnemyController> enemiesList)

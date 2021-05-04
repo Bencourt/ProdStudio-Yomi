@@ -76,7 +76,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Ambient.bank
   Name: Ambient
   StudioPath: bank:/Sound Effects/Ambient
-  lastModified: 637555736483288458
+  lastModified: 637556680842231498
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637555736483088274
+  lastModified: 637530100196937970
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -236,7 +236,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/SK-Footsteps.bank
   Name: SK-Footsteps
   StudioPath: bank:/Sound Effects/Sidekick/SK-Footsteps
-  lastModified: 637555736483618754
+  lastModified: 637556680842650417
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -295,7 +295,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/MC-Footsteps.bank
   Name: MC-Footsteps
   StudioPath: bank:/Sound Effects/Player/MC-Footsteps
-  lastModified: 637555736483468622
+  lastModified: 637556680842650417
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -358,7 +358,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1330198519763957038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2516925881227304612}
+  - {fileID: 9148685595642908983}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
   - {fileID: -7161562587218538566}
   StringsBanks:
   - {fileID: 9195302733695654900}
-  stringsBankWriteTime: 637555736483108300
+  stringsBankWriteTime: 637556680842650417
   cacheVersion: 6
 --- !u!114 &247137439654942148
 MonoBehaviour:
@@ -474,7 +474,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -2342698583906139098}
+  - {fileID: 8992793144475961632}
   MinDistance: 0
   MaxDistance: 0
   Length: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
   ID:
     data1: 0
     data2: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &2999270438982354307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +680,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Buttons.bank
   Name: Buttons
   StudioPath: bank:/Sound Effects/UI/Buttons
-  lastModified: 637555736483768894
+  lastModified: 637556680842640402
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -829,6 +829,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &8992793144475961632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MC-Footsteps/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &9148685595642908983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SK-Footsteps/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &9195302733695654900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +884,7 @@ MonoBehaviour:
   Path: ../Fmod/YomiFMod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637555736483108300
+  lastModified: 637556680842650417
   LoadResult: 0
   FileSizes:
   - Name: Desktop
