@@ -107,7 +107,7 @@ public class EnemyController : MonoBehaviour
         //this.enabled = false;
         //Debug.Log(playerCombat.GetComponent<PlayerCombat>().enemies);
         playerCombat.GetComponent<PlayerCombat>().enemies.Remove(this);
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     void OnDrawGizmosSelected()
