@@ -32,6 +32,8 @@ public class MenuHandler : MonoBehaviour
     public Camera inGameCamera;
     public Camera mainMenuCamera;
 
+    public bool inDialogue;
+
     public int lastState; // 0 = MainMenu ; 1 = PauseMenu
 
     public FMOD.Studio.EventInstance buttonClick;
@@ -78,6 +80,8 @@ public class MenuHandler : MonoBehaviour
         exitToMenuButton.onClick.AddListener(Exit);
         backButton.onClick.AddListener(Back);
 
+        inDialogue = false;
+
         lastState = 0;
 
         Cursor.lockState = CursorLockMode.None;
@@ -89,12 +93,21 @@ public class MenuHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DialogueCheck();
         MenuSwap();
     }
 
 
     void MenuSwap()
     {
+        if (inDialogue)
+        {
+            return;
+        }
+        if (!inDialogue && !pauseMenu && !inventoryMenu && !optionsMenu && !mainMenu)
+        {
+            Time.timeScale = 1.0f;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (inGame)
@@ -110,37 +123,41 @@ public class MenuHandler : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E) && inGame)
         {
-            if(!inventoryMenu)
+            if (!inventoryMenu)
             {
                 inventoryMenu = true;
                 inventoryUI.SetActive(true);
                 inventoryIcon.SetActive(false);
                 Time.timeScale = 0f;
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 return;
             }
-            else if(inventoryMenu)
+            else if (inventoryMenu)
             {
                 inventoryMenu = false;
                 inventoryUI.SetActive(false);
                 inventoryIcon.SetActive(true);
                 Time.timeScale = 1f;
                 Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 return;
             }
-
         }
-        if(dialogUI.activeSelf == true)
+    }
+
+    void DialogueCheck()
+    {
+        if (dialogUI.activeSelf)
         {
+            inDialogue = true;
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
         }
-        else if(dialogUI.activeSelf == false)
+        else
         {
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
+            inDialogue = false;
         }
-           
     }
 
     void Resume()
@@ -181,7 +198,6 @@ public class MenuHandler : MonoBehaviour
 
         mainMenu = false;
         inGame = true;
-
         mainMenuUI.SetActive(false);
         inGameUI.SetActive(true);
         dialogUI.SetActive(false);
@@ -202,7 +218,7 @@ public class MenuHandler : MonoBehaviour
 
         optionsMenu = false;
         optionsUI.SetActive(false);
-        if(lastState == 0) // Main Menu
+        if (lastState == 0) // Main Menu
         {
             mainMenu = true;
             mainMenuUI.SetActive(true);
@@ -254,7 +270,7 @@ public class MenuHandler : MonoBehaviour
 
         lastState = 0;
 
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
     }
 
     void PlaySound()
