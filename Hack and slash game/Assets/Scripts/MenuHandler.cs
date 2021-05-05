@@ -50,6 +50,22 @@ public class MenuHandler : MonoBehaviour
             inGameUI.SetActive(false);
             mainMenuCamera.enabled = true;
             inGameCamera.enabled = false;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else if (SceneManager.GetActiveScene().name == "UnderworldIntro")
+        {
+            mainMenu = false;
+            mainMenuUI.SetActive(false);
+            inGame = true;
+            inGameUI.SetActive(true);
+            mainMenuCamera.enabled = false;
+            inGameCamera.enabled = true;
+            dialogUI.SetActive(false);
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
@@ -59,6 +75,9 @@ public class MenuHandler : MonoBehaviour
             inGameUI.SetActive(true);
             mainMenuCamera.enabled = false;
             inGameCamera.enabled = true;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         pauseMenu = false;
         inventoryMenu = false;
@@ -84,8 +103,7 @@ public class MenuHandler : MonoBehaviour
 
         lastState = 0;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
 
         buttonClick = FMODUnity.RuntimeManager.CreateInstance("event:/UI-Button");
     }
