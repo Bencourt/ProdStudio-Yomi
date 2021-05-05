@@ -19,7 +19,7 @@ public class QuestManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Quest startingQuest = new Quest(0, "Head into town and speak to Chef John", GameObject.Find("Chef John"));
+        Quest startingQuest = new Quest(0, "Speak to your friend", GameObject.Find("SideKick"));
         inventory = Player.GetComponent<Inventory>().Slot;
         questProgression = 0;
         questQueue = new Queue<Quest>();
